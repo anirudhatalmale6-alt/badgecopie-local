@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BadgeCopie — copie de badges</title>
+<link rel="icon" href="/img/favicon.svg">
+<link rel="stylesheet" href="/css/style.css?v=2">
+</head>
+<body>
+
+<header class="barre">
+  <div class="marque"><span class="pastille-nfc"></span> BadgeCopie</div>
+  <div class="etat-lecteur" id="etat-lecteur">
+    <span class="voyant" id="voyant"></span>
+    <span id="etat-texte">Demarrage…</span>
+  </div>
+</header>
+
+<main class="scene">
+
+  <!-- Bandeau demo -->
+  <div class="bandeau-demo" id="bandeau-demo" hidden>
+    <b>Mode demonstration</b> — aucun lecteur branche. Utilisez les boutons ci-dessous
+    pour simuler une carte et voir le fonctionnement.
+    <div class="demo-boutons">
+      <button type="button" class="mini" data-pose="source">Poser un badge a copier</button>
+      <button type="button" class="mini" data-pose="vierge">Poser une carte vierge</button>
+      <button type="button" class="mini fantome" data-pose="rien">Retirer la carte</button>
+    </div>
+  </div>
+
+  <!-- Zone principale, un seul etat a la fois -->
+  <section class="carte-scene" id="scene">
+
+    <!-- Pas de lecteur -->
+    <div class="ecran" id="e-pas-lecteur" hidden>
+      <div class="illus gris">⌁</div>
+      <h1>Lecteur non detecte</h1>
+      <p>Branchez votre lecteur de badges en USB. Il apparaitra ici automatiquement.</p>
+    </div>
+
+    <!-- Aucune carte -->
+    <div class="ecran" id="e-attente" hidden>
+      <div class="illus">◎</div>
+      <h1>Posez un badge sur le lecteur</h1>
+      <p>Posez le badge que vous voulez copier bien a plat sur le lecteur.</p>
+    </div>
+
+    <!-- Carte source presente -->
+    <div class="ecran" id="e-source" hidden>
+      <div class="illus" id="src-illus">◉</div>
+      <h1 id="src-nom">Badge detecte</h1>
+      <p class="uid">Numero : <b id="src-uid">—</b></p>
+      <div class="verdict" id="src-verdict"></div>
+      <button type="button" class="gros primaire" id="btn-lire">Lire ce badge</button>
+    </div>
+
+    <!-- Lecture en cours -->
+    <div class="ecran" id="e-lecture" hidden>
+      <div class="illus tourne">◍</div>
+      <h1>Lecture en cours…</h1>
+      <p>Ne retirez pas le badge du lecteur.</p>
+    </div>
+
+    <!-- Resultat de lecture -->
+    <div class="ecran" id="e-lu" hidden>
+      <div class="illus ok">✓</div>
+      <h1 id="lu-titre">Badge lu</h1>
+      <p id="lu-detail" class="uid"></p>
+      <div class="secteurs" id="lu-secteurs"></div>
+      <div class="actions">
+        <button type="button" class="gros primaire" id="btn-copier">Copier sur une carte vierge</button>
+        <button type="button" class="gros fantome" id="btn-enregistrer">Enregistrer ce badge</button>
+      </div>
+    </div>
+
+    <!-- Attente carte vierge -->
+    <div class="ecran" id="e-vierge" hidden>
+      <div class="illus">▤</div>
+      <h1>Posez une carte vierge</h1>
+      <p>Retirez le badge d'origine, puis posez une carte vierge magique sur le lecteur.</p>
+      <p class="mini" id="vierge-attente">En attente d'une carte…</p>
+      <button type="button" class="gros primaire" id="btn-ecrire" hidden>Ecrire la copie</button>
+      <button type="button" class="lien" id="btn-annuler-ecriture">Annuler</button>
+    </div>
+
+    <!-- Ecriture en cours -->
+    <div class="ecran" id="e-ecriture" hidden>
+      <div class="illus tourne">◍</div>
+      <h1>Copie en cours…</h1>
+      <p>Ne retirez pas la carte du lecteur.</p>
+    </div>
+
+    <!-- Copie terminee -->
+    <div class="ecran" id="e-fini" hidden>
+      <div class="illus ok" id="fini-illus">✓</div>
+      <h1 id="fini-titre">Copie terminee</h1>
+      <p id="fini-detail"></p>
+      <button type="button" class="gros primaire" id="btn-recommencer">Copier un autre badge</button>
+    </div>
+
+    <!-- Carte non copiable -->
+    <div class="ecran" id="e-refus" hidden>
+      <div class="illus ko">✕</div>
+      <h1 id="refus-titre">Ce badge ne se copie pas</h1>
+      <p id="refus-detail"></p>
+    </div>
+
+  </section>
+
+  <!-- Bibliotheque -->
+  <section class="biblio" id="biblio">
+    <h2>Badges enregistres</h2>
+    <div id="biblio-liste" class="biblio-liste"><p class="vide">Aucun badge enregistre pour l'instant.</p></div>
+  </section>
+
+</main>
+
+<!-- Fenetre : enregistrer -->
+<div class="modale" id="modale-nom" hidden>
+  <div class="modale-boite">
+    <h3>Donner un nom a ce badge</h3>
+    <input type="text" id="champ-nom" placeholder="Ex : badge immeuble, boite aux lettres" maxlength="60">
+    <div class="modale-actions">
+      <button type="button" class="fantome" id="nom-annuler">Annuler</button>
+      <button type="button" class="primaire" id="nom-ok">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="/js/app.js?v=2"></script>
+</body>
+</html>

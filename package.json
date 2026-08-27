@@ -1,0 +1,25 @@
+{
+  "name": "badgecopie-local",
+  "version": "0.1.0",
+  "description": "Outil local de copie de badges NFC 13.56 MHz (ACR122U / Ewent) - prive, tourne sur la machine du client",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "demo": "BADGE_MODE=demo node server.js",
+    "test": "node --test test/unite.test.js",
+    "e2e": "python3 test/e2e.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "private": true,
+  "optionalDependencies": {
+    "nfc-pcsc": "^0.8.1"
+  }
+}
