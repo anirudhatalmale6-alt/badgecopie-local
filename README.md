@@ -63,7 +63,17 @@ porte le numero UID) est en lecture seule et refuse la copie.
 1. **Node.js 18 ou plus** — https://nodejs.org (version LTS).
 2. Le lecteur branche en USB.
 
-### macOS
+### macOS — le plus simple
+
+Double-cliquez le fichier **`Demarrer-sur-Mac.command`**. La premiere fois il
+installe ce qu'il faut (il peut ouvrir la fenetre Apple des « outils en ligne
+de commande » : cliquez sur Installer), puis il ouvre la page tout seul. Les
+fois suivantes, il demarre directement.
+
+La toute premiere fois, macOS peut refuser d'ouvrir un fichier telecharge :
+faites alors **clic droit sur le fichier → Ouvrir → Ouvrir**.
+
+### macOS — en ligne de commande (equivalent)
 
 ```
 cd badgecopie-local
@@ -72,7 +82,9 @@ npm start
 ```
 
 Le service PC/SC est integre a macOS : rien d'autre a installer. La page
-s'ouvre toute seule dans le navigateur.
+s'ouvre toute seule dans le navigateur. La fenetre affiche le mode au
+demarrage : « Mode : lecteur reel » quand le lecteur est bien pris en charge,
+« Mode : DEMONSTRATION » sinon.
 
 Note : pour la simple lecture/ecriture Mifare Classic par dictionnaire, on
 passe par PC/SC — pas besoin de decharger de pilote. (Ce n'est necessaire que
